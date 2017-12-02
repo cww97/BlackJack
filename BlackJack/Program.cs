@@ -7,16 +7,10 @@ using System.Threading.Tasks;
 
 namespace BlackJack{
     class Program{
-
-        private GameRoom g;
+        static private GameRoom g = new GameRoom();
 
         static void Main(string[] args){
-            
-            Console.WriteLine("Hello， Let's Play a Game");
-            Console.WriteLine("");
-            Console.Read();
-
-
+            g.main();
         }
     }
 }

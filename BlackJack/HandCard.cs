@@ -5,11 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlackJack{
-    //a player has a hand of cards
-    class HandCard{
+    class HandCard{ // 手牌
         private List<Card> cardList;
+
         public HandCard(){
             cardList = new List<Card>();
+        }
+
+        public void Clear() {
+            cardList.Clear();
         }
         
         internal List<Card> CardList{
@@ -48,5 +52,7 @@ namespace BlackJack{
         public bool checkBlackJack(){
             return getCardNum() == 2 && countTotalPoint() == 21;
         }
+
+        
     }
 }

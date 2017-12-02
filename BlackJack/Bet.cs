@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace BlackJack{
+    class Bet{  // 在某一局下的赌注
+        private int betNumber;  // the number of a player's bet
 
-namespace BlackJack{
-    class Bet{
-        private int betNumber;  //the number of a player's bet
         public Bet(){
             betNumber = 10;
         }
@@ -22,6 +17,5 @@ namespace BlackJack{
         public void addBetMoney(int betnum){  //Add Bet
             betNumber += betnum;
         }
-        
     }
 }

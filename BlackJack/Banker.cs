@@ -5,8 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlackJack{
-    //class Banker：BOSS
-    //banker should not get another card when banker's totalpoint beyond 17
+    // 庄家在点数大于17时不会再要牌
     class Banker :Person{
         public bool IsContinue(){
             return (this.getTotalPoint() < 17);

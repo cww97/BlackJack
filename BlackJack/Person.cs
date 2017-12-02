@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlackJack{
-    //class Player's and class Banker's superclass
-    //this class contains basic operation
-    class Person{
+﻿namespace BlackJack{
+    class Person{  // Player 和 Banker 的 父类
         private HandCard hand;
         private string name;
+
         public Person(){
             hand = new HandCard();
         }

@@ -1,16 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BlackJack{
+﻿namespace BlackJack{
     class Player :Person{
         private Bet bet;    //player's wager
         private int money;  //player's capital
+
         public Player(){
             Bet = new Bet();
             Money = 1000;
+        }
+
+        public bool Double() {
+            bet.betNum *= 2;
+            if (bet.betNum <= money) return true;
+            bet.betNum /= 2;
+            return false;
         }
 
         public int Money{
@@ -18,7 +20,7 @@ namespace BlackJack{
             set{money = value;}
         }
 
-        internal Bet Bet{
+        public Bet Bet{
             get{return bet;}
             set{bet = value;}
         }

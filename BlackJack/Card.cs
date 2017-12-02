@@ -1,33 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BlackJack{
     class Card{
-        public int value;   //the number of the card,such as "1","10"
-        public String fileNum;//the corresponding card file name in the file
-        //the suits of card is useless when comparing,only useful in dealing cards to distinguish different cards
-        //num in range 1-52
+        public int value;   // 1..10
+        private int hashNum;  // 牌的编号，为什么要用String存呢
+        //private readonly String[] flower = { "♥", "♦", "♠", "♣" };
+        private readonly String[] flower = { "红桃", "方片", "黑桃", "梅花" };
+        private readonly String[] number = { "J", "Q", "K" };
+
+        // 在这个游戏中，牌的花色没用作用，故不做考虑
+        // num: 1..52
         public Card(int num){
             this.value = countCardValue(num);
-            this.fileNum = num.ToString();
+            this.hashNum = num;
         }
 
-        //according to the filename to calculalte the value
+        // 从牌的编号得到牌上的真实数字
         private int countCardValue(int num){
-            int value;
-            if (num <= 40){
-                if (num % 4 == 0) { value = num / 4; }  // 4,12,16...not to add 1
-                else { value = (num / 4) + 1; }
-            }
-            else { value = 10; }  // card's value is 10 when the filename beyond 40
-            return value;
+            if (num > 40) return 10;  // J Q K 都算 10
+            return (num - 1) / 4 + 1; // 111122223333....10101010
         }
 
-        public String GetCardFileName(){
-            return fileNum;
+        public String GetCardFace(){
+            int hash = hashNum - 1;
+            String flo = flower[hash % 4];
+            String num = (hash < 40) ? (hash/4).ToString() : number[(hash - 40) / 4];
+            return flo + " " + num;
         }
 
         public int GetCardValue(){

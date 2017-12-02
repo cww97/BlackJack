@@ -1,98 +1,113 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
 
 namespace BlackJack{
     class GameRoom{
-        private Player[] players;
-        private Banker banker;
-        private Deck deck;
+        private GameTable g;
 
-        //Init
-        public GameRoom(){
-            players = new Player[3];
-            for (int i = 0; i < players.Length; i++){
-                players[i] = new Player();
-                switch (i){
-                    case 0 :
-                        players[i].Name = "KEN";
+        public GameRoom() {
+            g = new GameTable();
+        }
+
+        void init() {
+            Console.WriteLine("来啊，快活啊，反正有，大把时光= =");
+            Console.WriteLine("Please enter your name:");
+            String UserName = Console.ReadLine();
+            Player[] p = new Player[1];
+            p[0] = new Player();
+            p[0].Name = UserName;
+            g.Players = p;
+            Console.WriteLine("Welcome, " + g.Players[0].Name);
+        }
+
+        int play(int playerIdx) {
+            Console.WriteLine("您的余额为： " + g.Players[playerIdx].Money + ", 请下注：");
+            int bet = Console.Read();
+            g.playerBet(playerIdx, bet);
+            // 先给玩家两张牌
+            for (int i = 0; i < 2; i++) {
+                Card c = g.dealOneCardToPlayer(playerIdx);
+                Console.WriteLine("得到一张牌: " + c.GetCardFace());
+            }
+            for (int i = 0; i < 3; i++) {
+                Console.WriteLine("您有三种选择：stand(直接结束), hit(继续要牌), double(加倍结束).");
+                Console.WriteLine("输出(s/h/d)进行您的选择：");
+                String op = Console.ReadLine();
+                if (op == "s"){ // ----------------stand---------------------
+                    break;
+                } else if (op == "h") { // --------------hit-----------------
+                    Card c = g.dealOneCardToPlayer(playerIdx);
+                    Console.WriteLine("得到一张牌: " + c.GetCardFace());
+                    if (g.IsPointOut(playerIdx)){
+                        Console.WriteLine("您爆牌了，输了输了");
                         break;
-                    case 1:
-                        players[i].Name = "JHON";
-                        break;
-                    case 2:
-                        players[i].Name = "ALICE";
-                        break;
+                    }
+                } else if (op == "d") { // ---------------double-------------
+                    bool succ = g.playerDouble(playerIdx);
+                    if (!succ) {
+                        Console.WriteLine("钱不够加倍了，请做其他选择");
+                        i--;
+                    } else{  //  钱足够加倍
+                        Card c = g.dealOneCardToPlayer(playerIdx);
+                        Console.WriteLine("得到一张牌: " + c.GetCardFace());
+                        if (g.IsPointOut(playerIdx)) Console.WriteLine("您爆牌了，输了输了");
+                    }
+                    break;
+                } else { // error input
+                    Console.WriteLine("输入错误，请重新输入.");
+                    i--;
                 }
-            }            
-            banker = new Banker();
-            banker.Name = "Me";
-            deck = new Deck();
-        }
-       
-        //Send a Card to player
-        public Card dealOneCardToPlayer(int i){
-            Card card = deck.dealCard();
-            players[i].getCard(card);
-            return card;
-        }
-        
-        //Get player point
-        public int returnPlayerTotalPoint(int i){
-           return players[i].getTotalPoint();
-        }
-        
-        //Send a Card to Banker
-        public Card dealOneCardToBanker(){
-            Card card = deck.dealCard();
-            banker.getCard(card);
-            return card;
-        }
-        
-        //Determine Boss if continue Get Card
-        public bool isBankerContinue(){
-            return banker.IsContinue();
-        }
-        
-        //Get Boss Point
-        public int returnDealerTotalCount(){
-            return banker.getTotalPoint();
-        }    
+            }
+            int point = g.returnPlayerTotalPoint(playerIdx);
+            if (!g.IsPointOut(playerIdx))
+                Console.WriteLine("您的点数为 " + point);
+            Console.WriteLine("--------您的表演结束了---------");
 
-        //Get Card Number in player
-        public int GetPlayerCardNumbers(int No){
-            return players[No].returnTotalCardNumInHand();
+            return g.IsPointOut(playerIdx) ? -1 : point;
         }
 
-        //Get Card Number in banker
-        public int GetBankerCardNumbers(){
-            return banker.returnTotalCardNumInHand();
+        int bankerPlay(){
+
+            return -1;
         }
 
-        //Determine the point of player if out 21 
-        public bool IsPointOut(int playerNo){
-            return players[playerNo].getTotalPoint() > 21;
+        void playerWin(int idx){
+            Console.WriteLine("赌神你好。。");
+            g.Players[idx].Win();
+            Console.WriteLine("现在余额");
         }
 
-        //Determine the point of Banker if out 21 
-        public bool IsBankerOut(){
-            return banker.getTotalPoint() > 21;
+        void playerLose(int idx){
+
         }
 
-        //Get All Kinds of Attribute     
-        internal Player[] Players{
-            get{return players;}
-            set{players = value;}
-        }
-        internal Banker Banker{
-            get{return banker;}
-            set{banker = value;}
-        }
-        internal Deck Deck{
-            get{return deck;}
-            set{deck = value;}
+        public void main() {
+            init();
+            Console.WriteLine("现在您已坐在 BlackJack 的桌前， 来一盘吗（y/n）");
+            String op = Console.ReadLine();
+            for (; op != "n";) {
+                int playerPoint = play(0);
+                if (g.Players[0].isBlackJack()) {
+                    Console.WriteLine("BlackJack!!!");
+                    playerWin(0);
+                } else if (playerPoint == -1) {
+                    playerLose(0);
+                } else {
+                    int bankerPoint = bankerPlay();
+                    if (bankerPoint == -1) playerWin(0);
+                    else {
+                        if (bankerPoint < playerPoint) playerWin(0);
+                        else playerLose(0);
+                    }
+                }
+                Console.WriteLine("再来一轮？");
+                g.Restart();
+                op = Console.ReadLine();
+            }
+            Console.WriteLine("Goodbye.");
+            Console.Read();
         }
     }
 }
