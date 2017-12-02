@@ -15,6 +15,16 @@
             return false;
         }
 
+        public void Win(){
+            money += bet.betNum;
+            bet = new Bet();
+        }
+
+        public void Lose(){
+            money -= bet.betNum;
+            bet = new Bet();
+        }
+
         public int Money{
             get{return money;}
             set{money = value;}

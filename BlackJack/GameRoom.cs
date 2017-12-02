@@ -23,14 +23,21 @@ namespace BlackJack{
         }
 
         int play(int playerIdx) {
-            Console.WriteLine("您的余额为： " + g.Players[playerIdx].Money + ", 请下注：");
-            int bet = Console.Read();
+            // ===========================下注=============================
+            int money = g.getPlayerMoney(playerIdx);
+            Console.WriteLine("您的余额为： " + money + ", 请下注：");
+            int bet = Convert.ToInt32(Console.ReadLine());
+            for (;bet > money;){
+                Console.WriteLine("没钱别乱下注, again!");
+                bet = Console.Read();
+            }
             g.playerBet(playerIdx, bet);
             // 先给玩家两张牌
             for (int i = 0; i < 2; i++) {
                 Card c = g.dealOneCardToPlayer(playerIdx);
                 Console.WriteLine("得到一张牌: " + c.GetCardFace());
             }
+            // 由玩家决定是否继续
             for (int i = 0; i < 3; i++) {
                 Console.WriteLine("您有三种选择：stand(直接结束), hit(继续要牌), double(加倍结束).");
                 Console.WriteLine("输出(s/h/d)进行您的选择：");
@@ -64,23 +71,24 @@ namespace BlackJack{
             if (!g.IsPointOut(playerIdx))
                 Console.WriteLine("您的点数为 " + point);
             Console.WriteLine("--------您的表演结束了---------");
-
             return g.IsPointOut(playerIdx) ? -1 : point;
         }
 
         int bankerPlay(){
 
-            return -1;
+            return 10;
         }
 
         void playerWin(int idx){
             Console.WriteLine("赌神你好。。");
-            g.Players[idx].Win();
-            Console.WriteLine("现在余额");
+            g.playerWin(idx);
+            Console.WriteLine("现在余额为" + g.getPlayerMoney(idx));
         }
 
         void playerLose(int idx){
-
+            Console.WriteLine("发生这种事，我很抱歉。");
+            g.playerLose(idx);
+            Console.WriteLine("现在余额为" + g.getPlayerMoney(idx));
         }
 
         public void main() {

@@ -1,4 +1,7 @@
-﻿namespace BlackJack{
+﻿using System;
+
+
+namespace BlackJack{
     class GameTable{
         private Player[] players;
         private Banker banker;
@@ -32,6 +35,24 @@
             foreach (Player p in players) {
                 p.Hand.Clear();
             }
+        }
+
+        public int getPlayerMoney(int idx){
+            return players[idx].Money;
+        }
+
+        public void playerBet(int idx, int bet){
+            // 保证兜里钱够
+            players[idx].Bet.betNum = bet;
+            //Console.WriteLine("????????? 下注 " + bet);
+        }
+
+        public void playerWin(int idx){
+            players[idx].Win();
+        }
+        
+        public void playerLose(int idx){
+            players[idx].Lose();
         }
         //-------------------------banker-----------------------------
         // Send a Card to Banker

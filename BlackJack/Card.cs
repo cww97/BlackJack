@@ -24,7 +24,10 @@ namespace BlackJack{
         public String GetCardFace(){
             int hash = hashNum - 1;
             String flo = flower[hash % 4];
-            String num = (hash < 40) ? (hash/4).ToString() : number[(hash - 40) / 4];
+            String num;
+            if (hash < 4) num = "A";
+            else if (hash < 40) num = (hash / 4 + 1).ToString();
+            else num = number[(hash - 40) / 4];
             return flo + " " + num;
         }
 
