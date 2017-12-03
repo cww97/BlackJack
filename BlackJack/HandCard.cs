@@ -52,7 +52,5 @@ namespace BlackJack{
         public bool checkBlackJack(){
             return getCardNum() == 2 && countTotalPoint() == 21;
         }
-
-        
     }
 }

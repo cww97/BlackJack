@@ -14,14 +14,14 @@ namespace BlackJack{
             deck = new Deck();
         }
        
-        //Send a Card to player
+        // Send a Card to player
         public Card dealOneCardToPlayer(int i){
             Card card = deck.dealCard();
             players[i].getCard(card);
             return card;
         }
         
-        //Get player point
+        // Get player point
         public int returnPlayerTotalPoint(int i){
            return players[i].getTotalPoint();
         }
