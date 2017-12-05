@@ -76,7 +76,25 @@ namespace BlackJack{
 
         int bankerPlay(){
 
-            return 10;
+            // 先给庄家两张牌
+            for (int i = 0; i < 2; i++){
+                Card c = g.dealOneCardToBanker();
+                Console.WriteLine("得到一张牌 " );
+            }
+            // 由手牌点数决定是否继续
+            while (g.isBankerContinue()){
+                // --------------hit-----------------
+                Card c = g.dealOneCardToBanker();
+                if (g.IsBankerOut()){
+                    Console.WriteLine("庄家爆牌了，输了输了");
+                    break;
+                }
+            }
+            // --------------stand-----------------
+            int point = g.returnDealerTotalCount();
+            string face = g.ShowBankerHandCard();
+            Console.WriteLine("庄家手牌为："+ face );
+            return point;
         }
 
         void playerWin(int idx){

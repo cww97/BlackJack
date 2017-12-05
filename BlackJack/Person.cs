@@ -36,5 +36,9 @@
         public bool isBlackJack(){
             return Hand.checkBlackJack();
         }
+
+        public string getHandCard(){
+            return Hand.showHandCard();
+        }
     }
 }

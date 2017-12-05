@@ -37,6 +37,15 @@ namespace BlackJack{
             }
             return totalPointCount;
         }
+        //Show Hand Card
+        public String showHandCard(){
+            string face = "";
+            foreach (Card card in cardList){
+                face += "" + card.GetCardFace();
+            }
+            return face;
+        }
+        
 
         //Add Card to Bank
         public void addBankedCard(Card card){

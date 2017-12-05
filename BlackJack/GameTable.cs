@@ -91,6 +91,11 @@ namespace BlackJack{
         public bool IsBankerOut(){
             return banker.getTotalPoint() > 21;
         }
+        
+        //Show Hand Card
+        public string ShowBankerHandCard(){
+            return banker.getHandCard();
+        }
 
         //Get All Kinds of Attribute     
         internal Player[] Players{
