@@ -245,3 +245,6 @@
  -.fake/ 
 
 /.idea/
+.vs/BlackJack/v14
+/BlackJack/obj
+/BlackJack/bin
