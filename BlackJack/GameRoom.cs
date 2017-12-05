@@ -85,7 +85,6 @@ namespace BlackJack{
             while (g.isBankerContinue()){
                 // --------------hit-----------------
                 Card c = g.dealOneCardToBanker();
-                Console.WriteLine("得到一张牌 " );
                 if (g.IsBankerOut()){
                     Console.WriteLine("庄家爆牌了，输了输了");
                     break;
