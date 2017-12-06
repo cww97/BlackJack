@@ -1,6 +1,0 @@
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\bin\Debug\BlackJack.exe.config
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\bin\Debug\BlackJack.exe
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\bin\Debug\BlackJack.pdb
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\obj\Debug\BlackJack.csprojResolveAssemblyReference.cache
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\obj\Debug\BlackJack.exe
-C:\Users\尤豪谦\RiderProjects\BlackJack\BlackJack\obj\Debug\BlackJack.pdb

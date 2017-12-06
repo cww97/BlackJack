@@ -1,4 +1,4 @@
-# BlackJack
+﻿# BlackJack
 
 cww97 和 甜心 的 OOAD Project
 
@@ -32,6 +32,8 @@ Class GameRoom:It realizes functions that initialize GameTable and Players and b
 Class GameTable:It encapsulates many methods.
 
 Like money and betmoney the two attributes,they can't be a class.Because they doesn't have their own attributes and operates.
+
+= what？？？
 
 
 ## Use Case Model
