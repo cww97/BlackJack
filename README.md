@@ -58,55 +58,55 @@ Like money and betmoney the two attributes,they can't be a class.Because they do
 Player：
 
 Contract CO1:init
-操作：init()
-交叉引用：
-前置条件：
-后置条件：
+operation：init()
+cross reference：begin game
+precondition：system is going normally
+postcondition：player is already to play this game
 
 Contract CO2:playerBet
-操作：playerBet()
-交叉引用：
-前置条件：
-后置条件：
+operation：playerBet()
+cross reference：do bet
+precondition：game begins and player is already
+postcondition：system records player's bet and his remained money updates
 
 Contract CO3:dealOneCardToPlayer
-操作：dealOneCardToPlayer()
-交叉引用：
-前置条件：
-后置条件：
+operation：dealOneCardToPlayer()
+cross reference：hit
+precondition：player's hand-card's total value is under 21 and player wants to hit
+postcondition：a new card adds to player's hand-card and hand-card's value updates
     
-？Contract CO4:直接结束
-操作：enterPassengerInfo()
-交叉引用：
-前置条件：
-后置条件：
+Contract CO4:directlystop
+operation:no operation and break directly
+cross reference：directly end
+precondition：player's hand-card's total value is under 21 and player wants to stop getting another card
+postcondition：player's turn is over
 
 Contract CO5:playerDouble
-操作：playerDouble()
-交叉引用：
-前置条件：
-后置条件：
+operation：playerDouble()
+cross reference：double and end
+precondition：player's hand-card's total value is under 21 and player wants to double the bet and stop getting another card
+postcondition：system records player's bet to double and his remained money updates and player's turn is over
 
 
 Banker:
 
-？Contract CO1:判断玩家是否结束
-操作：
-交叉引用：
-前置条件：
-后置条件：
+Contract CO1:decide whether player's turn is over
+operation：no opetation
+cross reference：no 
+precondition：game is going normally
+postcondition：banker's turn is beginning
 
 Contract CO2:dealOneCareToBanker
-操作：dealOneCareToBanker()
-交叉引用：
-前置条件：
-后置条件：
+operation：dealOneCareToBanker()
+cross reference：hit
+precondition：banker's hand-card's value is under 17
+postcondition：a new card adds to banker's hand-card and hand-card's value updates
 
-？Contract CO3:直接结束
-操作：
-交叉引用：
-前置条件：
-后置条件：
+Contract CO3:directlystop
+operation：no operation and break directly
+cross reference：end
+precondition：banker's hand-card's value is not under 17
+postcondition：banker's turn is over and system begins to decide who is the winner
 
 ##Summary
-This lab is not only exercises our logical thinking ability but also strengthen our abilities of OOAD.
+This lab is not only exercises our logical thinking ability but also strengthen our abilities of OOAD.We tasted sour and bitter ,sweet and happiness in this lab.We found the joy of analysis&design and inspired our passion to do the best.Thanks to this lab,we learn more new things and reinforce our knowledge.We love BlackJack!We love OOAD. 
