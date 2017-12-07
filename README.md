@@ -1,5 +1,7 @@
 ﻿# BlackJack
 
+华东师范大学 计算机科学与软件工程学院
+
 cww97 和 甜心 的 OOAD Project
 
 working.....
@@ -56,22 +58,25 @@ Like money and betmoney the two attributes,they can't be a class.Because they do
 
 ![sequenceBanker.PNG](docs/pics/sequenceBanker.PNG)
 
-###Operation Contracts
-Player：
+### Operation Contracts
+
+### Player：
 
 Contract CO1:init
-操作：init()
+Operation：init()
 交叉引用：
 前置条件：
 后置条件：
 
 Contract CO2:playerBet
-操作：playerBet()
-交叉引用：
-前置条件：
-后置条件：
 
-Contract CO3:dealOneCardToPlayer
+Operation：|PlayerBet()
+-------------|-----
+Cross-Reference:|1 
+PreCondition:|1
+PostCondition:|1
+
+#### Contract CO3:dealOneCardToPlayer
 操作：dealOneCardToPlayer()
 交叉引用：
 前置条件：
@@ -90,7 +95,7 @@ Contract CO5:playerDouble
 后置条件：
 
 
-Banker:
+### Banker:
 
 ？Contract CO1:判断玩家是否结束
 操作：
@@ -110,5 +115,8 @@ Contract CO2:dealOneCareToBanker
 前置条件：
 后置条件：
 
-##Summary
+## Summary
+
 This lab is not only exercises our logical thinking ability but also strengthen our abilities of OOAD.
+
+## References
