@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 namespace BlackJack{
     class Program{
         static private GameRoom g = new GameRoom();
-
         static void Main(string[] args){
             g.main();
         }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-//using System.Drawing;
+using System.Drawing;
 
 namespace BlackJack{
     class GameRoom{
@@ -75,11 +75,10 @@ namespace BlackJack{
         }
 
         int bankerPlay(){
-
             // 先给庄家两张牌
             for (int i = 0; i < 2; i++){
                 Card c = g.dealOneCardToBanker();
-                //Console.WriteLine("得到一张牌 " );
+                Console.WriteLine("得到一张牌 " );
             }
             // 由手牌点数决定是否继续
             while (g.isBankerContinue()){
@@ -94,7 +93,7 @@ namespace BlackJack{
             int point = g.returnDealerTotalCount();
             string face = g.ShowBankerHandCard();
             Console.WriteLine("庄家手牌为："+ face );
-            return g.IsBankerOut() ? -1: point;
+            return point;
         }
 
         void playerWin(int idx){

@@ -5,7 +5,7 @@ namespace BlackJack{
         private Card[] deckCards;
         private int currentIndex;
 
-        internal Card[] DeckCards{
+        private Card[] DeckCards{
             get{return deckCards;}
             set{deckCards = value;}
         }
@@ -17,13 +17,23 @@ namespace BlackJack{
 
         public Deck(){
             DeckCards = new Card[52];
-            currentIndex = 1;
+            currentIndex = 0;
             //Put cards into array
-            for (int i = 1; i <= 52; i++){
-                DeckCards[i-1] = new Card(i);
+            for (int i = 0; i < 52; i++){
+                DeckCards[i] = new Card(i);
             }
             WashCard(); //  shuffle the cards
+            Throw2Cards();
         }
+
+
+        // requirement change1
+        public bool Throw2Cards()
+        {
+            currentIndex += 2;
+            return currentIndex < 52;
+        }
+
 
         public Card dealCard(){  // 发牌
             if (currentIndex >= 52) return null; // 牌堆里没牌了, null

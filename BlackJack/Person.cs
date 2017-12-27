@@ -1,20 +1,20 @@
 ﻿namespace BlackJack{
     class Person{  // Player 和 Banker 的 父类
-        private HandCard hand;
-        private string name;
+        private HandCard _hand;
+        private string _name;
 
-        public Person(){
-            hand = new HandCard();
+        protected Person(){
+            _hand = new HandCard();
         }
 
         internal string Name{
-            get{return name;}
-            set{name = value;}
+            get{return _name;}
+            set{_name = value;}
         }
 
         internal HandCard Hand{
-            get{return hand;}
-            set{hand = value;}
+            get{return _hand;}
+            set{_hand = value;}
         }
 
         //Call in Send Card
