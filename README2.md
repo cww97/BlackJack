@@ -28,23 +28,41 @@ do some changes on `play()`
 I feel the origin 'double'(ask for one more card, make bet double, then over) is pretty stupid. Because we `AddBet()` and `Hit()` can do this. So I replace it with the operation `AddBet()`, which is need in the ppt.
 
 ```c#
-Console.WriteLine("您有三种选择：1.stand(直接结束), 2.hit(继续要牌), 3.增加赌注.");
-Console.WriteLine("输出(1/2/3)进行您的选择：");
-
------------------------------
-
-else if (op == 3) { // ---------------增加赌注-------------
+private void AddBet(int playerIdx)
+{
     Console.WriteLine("Your Cash: " + g.getPlayerBet(playerIdx) + "/" + g.getPlayerMoney(playerIdx));
     Console.WriteLine("How much bet do you want to add?");
     int addMoney = Convert.ToInt32(Console.ReadLine());
     Console.WriteLine("addMoney == " + addMoney);
     if (g.AddBet(playerIdx, addMoney)){
         Console.WriteLine("加注成功，Now: " + g.getPlayerBet(playerIdx) + "/" + g.getPlayerMoney(playerIdx));
-    }else{
+    }
+    else{
         Console.WriteLine("余额不足，加注失败");
     }
 }
 ```
+
+To make it more grace, We reorganized `play(playerIdx)`, Here is the loop:
+
+```c#
+// 由玩家决定是否继续
+for (int i = 0; i < 999; i++) {
+    Console.WriteLine("您有三种选择：1.stand(直接结束), 2.hit(继续要牌), 3.增加赌注.");
+    Console.WriteLine("输出(1/2/3)进行您的选择：");
+    int op = Convert.ToInt32(Console.ReadLine());
+    if (op == 1) break;
+    else if (op == 2) { 
+        if (Hit(playerIdx)) break;
+    } else if (op == 3) { 
+        AddBet(playerIdx);
+    } else { 
+        Console.WriteLine("输入错误，请重新输入.");
+    }
+}
+```
+
+Repeat it many times, until player point out or player choose to `stand()`(because we have nothing to do in stand, so we only have a `break` to express 'stand()').
 
 ### 3. Win/Lose Condition: 22 -> 21
 
@@ -69,3 +87,38 @@ for (int i = 0; i < 52; i++){
 ### 5. PointOut: 21 -> 22
 
 This is the same as the requirement change3. We donot need extra change.
+
+### 6. Multiplayer
+
+We thought about this question before. So our `GameTable.cs` do not have only one `Player`. What we have is `Players[]`. However, in our first version, we only have this code `int playerPoint = Play(0);`. After that we compare this player's point with banker's. Now we need a little change of the `GameRoom`. We may need a `for` loop to get this.
+
+Single Player(Origin):
+```c#
+int playerPoint = Play(0);
+if (g.Players[0].isBlackJack()) {
+    Console.WriteLine("BlackJack!!!");
+    playerWin(0);
+} else if (playerPoint == -1) {
+    playerLose(0);
+} else {
+    if (bankerPoint == -1) playerWin(0);
+    else {
+        if (bankerPoint < playerPoint) playerWin(0);
+        else playerLose(0);
+    }
+}
+```
+
+MultiPlayer(Now):
+
+```
+
+
+```
+
+
+## Reference
+
+1. C# Array, https://www.cnblogs.com/eniac12/p/4393978.html
+
+2. C# Sort, http://blog.csdn.net/zhulongxi/article/details/51457891

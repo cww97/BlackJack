@@ -6,6 +6,7 @@ namespace BlackJack{
         private Player[] players;
         private Banker banker;
         private Deck deck;
+        private int AllBet;
         
         public GameTable(){  // Init
             //players = new Player[1];
@@ -15,15 +16,15 @@ namespace BlackJack{
         }
        
         // Send a Card to player
-        public Card dealOneCardToPlayer(int i){
+        public Card DealOneCardToPlayer(int i){
             Card card = deck.dealCard();
-            players[i].getCard(card);
+            players[i].GetCard(card);
             return card;
         }
         
         // Get player point
-        public int returnPlayerTotalPoint(int i){
-           return players[i].getTotalPoint();
+        public int PlayerTotalPoint(int i){
+           return players[i].GetTotalPoint();
         }
 
         public void Restart() {
@@ -33,63 +34,88 @@ namespace BlackJack{
             }
         }
 
-        public int getPlayerMoney(int idx){
+        public int GetPlayerMoney(int idx){
             return players[idx].Money;
         }
         
-        public int getPlayerBet(int idx){
+        public int GetPlayerBet(int idx){
             return players[idx].Bet.betNum;
         }
 
-        public void playerBet(int idx, int bet){
-            // 保证兜里钱够
+        public void PlayerBet(int idx, int bet){ // 保证兜里钱够
             players[idx].Bet.betNum = bet;
-            //Console.WriteLine("????????? 下注 " + bet);
+            AllBet += bet;
         }
 
-        public bool AddBet(int p, int v)
-        {
+        public bool AddBet(int p, int v){
             return players[p].AddBet(v);
         }
 
-        public void playerWin(int idx){
-            players[idx].Win();
+        public void PlayerWin(int idx, int cnt){
+            players[idx].Win(AllBet/cnt);
         }
         
-        public void playerLose(int idx){
+        public void PlayerLose(int idx){
             players[idx].Lose();
         }
+
+        public int SortPlayers(int playerCnt)
+        {
+            for (int i = 0; i < playerCnt - 1; i++)
+            {
+                for (int j = i + 1; j < playerCnt; j++)
+                {
+                    if (players[i].GetTotalPoint() < players[j].GetTotalPoint())
+                    {
+                        Player tmp = players[i];
+                        players[i] = players[j];
+                        players[j] = tmp;
+                    }
+                }
+            }
+            
+            return players[0].GetTotalPoint();
+        }
+
+        public int GetWinCnt(int playerCnt){
+            int ans = 0;
+            for (int i = 0; i < playerCnt; i++){
+                if (players[i].GetTotalPoint() == players[0].GetTotalPoint()) ans++;
+            }
+            return ans;
+        }
+
         //-------------------------banker-----------------------------
         // Send a Card to Banker
-        public Card dealOneCardToBanker(){
+        public Card DealOneCardToBanker(){
             Card card = deck.dealCard();
-            banker.getCard(card);
+            banker.GetCard(card);
             return card;
         }
         
         // Determine Boss if continue Get Card
-        public bool isBankerContinue(){
+        public bool BankerContinue(){
             return banker.IsContinue();
         }
         
         // Get Boss Point
-        public int returnDealerTotalCount(){
-            return banker.getTotalPoint();
+        public int DealerTotalCount(){
+            return banker.GetTotalPoint();
         }
 
         // Determine the point of player if out 21 
         public bool IsPointOut(int playerNo){
-            return players[playerNo].getTotalPoint() > 21;
+            return players[playerNo].GetTotalPoint() > 21;
         }
 
         //Determine the point of Banker if out 21 
         public bool IsBankerOut(){
-            return banker.getTotalPoint() > 21;
+            return banker.GetTotalPoint() > 21;
         }
         
         //Show Hand Card
         public string ShowBankerHandCard(){
-            return banker.getHandCard();
+            return banker.GetHandCard();
         }
 
         //Get All Kinds of Attribute     

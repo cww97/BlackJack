@@ -1,4 +1,5 @@
-﻿using System.Xml.Schema;
+﻿using System.Collections.Generic;
+using System.Xml.Schema;
 
 namespace BlackJack{
     class Player :Person{
@@ -16,8 +17,8 @@ namespace BlackJack{
             return true;
         }
 
-        public void Win(){
-            money += bet.betNum;
+        public void Win(int v){
+            money += v;
             bet = new Bet();
         }
 

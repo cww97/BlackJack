@@ -18,26 +18,18 @@
         }
 
         //Call in Send Card
-        public void getCard(Card card){
+        public void GetCard(Card card){
             Hand.addBankedCard(card);
         }
 
         //Get Point
-        public int getTotalPoint(){
-            return Hand.countTotalPoint();
+        public int GetTotalPoint()
+        {
+            int ret = Hand.countTotalPoint();
+            return ret <= 22 ? ret : -1;
         }
 
-        //Get Card Number in Hand
-        public int returnTotalCardNumInHand(){
-            return Hand.getCardNum();
-        }
-
-        //Determine if BlackJack
-        public bool isBlackJack(){
-            return Hand.checkBlackJack();
-        }
-
-        public string getHandCard(){
+        public string GetHandCard(){
             return Hand.showHandCard();
         }
     }

@@ -8,7 +8,7 @@ namespace BlackJack{
     // 庄家在点数大于17时不会再要牌
     class Banker :Person{
         public bool IsContinue(){
-            return (this.getTotalPoint() < 17);
+            return (this.GetTotalPoint() < 17);
         }
     }
 }
