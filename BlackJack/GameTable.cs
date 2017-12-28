@@ -7,6 +7,7 @@ namespace BlackJack{
         private Banker banker;
         private Deck deck;
         private int AllBet;
+        private const int BREAK_POINT = 22;
         
         public GameTable(){  // Init
             //players = new Player[1];
@@ -103,14 +104,14 @@ namespace BlackJack{
             return banker.GetTotalPoint();
         }
 
-        // Determine the point of player if out 21 
+        // Determine the point of player if out BREAK_POINT 
         public bool IsPointOut(int playerNo){
-            return players[playerNo].GetTotalPoint() > 21;
+            return players[playerNo].GetTotalPoint() > BREAK_POINT;
         }
 
-        //Determine the point of Banker if out 21 
+        //Determine the point of Banker if out BREAK_POINT 
         public bool IsBankerOut(){
-            return banker.GetTotalPoint() > 21;
+            return banker.GetTotalPoint() > BREAK_POINT;
         }
         
         //Show Hand Card
