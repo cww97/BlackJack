@@ -6,6 +6,7 @@ namespace BlackJack{
         private Player[] players;
         private Banker banker;
         private Deck deck;
+        private const int BREAK_POINT = 22;
         
         public GameTable(){  // Init
             //players = new Player[1];
@@ -77,14 +78,14 @@ namespace BlackJack{
             return banker.getTotalPoint();
         }
 
-        // Determine the point of player if out 21 
+        // Determine the point of player if out BREAK_POINT 
         public bool IsPointOut(int playerNo){
-            return players[playerNo].getTotalPoint() > 21;
+            return players[playerNo].getTotalPoint() > BREAK_POINT;
         }
 
-        //Determine the point of Banker if out 21 
+        //Determine the point of Banker if out BREAK_POINT 
         public bool IsBankerOut(){
-            return banker.getTotalPoint() > 21;
+            return banker.getTotalPoint() > BREAK_POINT;
         }
         
         //Show Hand Card

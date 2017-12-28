@@ -43,13 +43,20 @@ Like money and betmoney the two attributes, there is no need for them to become 
 
 ## Use Case Model
 
-### 1
 
-![userCase1.PNG](docs/pics/userCase1.PNG)
+![userCase1.PNG](docs/pics/userCase-2.0.PNG)
 
-### 2
+### Use Case Description
 
-![userCase2.PNG](docs/pics/userCase2.PNG)
+
+User Case UC1:| Play Game
+:---|:---
+Scope:| BlackJack Game
+Level:| User Goals
+Main Actor:| Player,Banker
+Stakeholders and Concerns:| Player:wants to see the game ？
+Main successful scene:| 1、Player requests to initialize a new game2、Player bets 3、Player gets two cards 4、Player decides to hit ,stand or double&stand 5、If player's hand-card's value is over 21,player loses,game over 5、Until player stands ,it turns to banker's turn.Banker will hit when his hand-card'value is under 17 6、If banker's hand-card's value is over 21 ,banker loses,game over 7、Else to compare player's and banker's hand-card's value to show the result
+Extension:| 
 
 ## System Sequence Diagram
 

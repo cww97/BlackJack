@@ -8,6 +8,7 @@ namespace BlackJack{
     class HandCard{ // 手牌
         private List<Card> cardList;
 
+        private const int BREAK_POINT = 22;
         public HandCard(){
             cardList = new List<Card>();
         }
@@ -59,7 +60,7 @@ namespace BlackJack{
 
         //Determine if BlackJack
         public bool checkBlackJack(){
-            return getCardNum() == 2 && countTotalPoint() == 21;
+            return getCardNum() == 2 && countTotalPoint() == BREAK_POINT;
         }
     }
 }
