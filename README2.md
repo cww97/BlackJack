@@ -77,3 +77,50 @@ This is the same as the requirement change3. We donot need extra change.
 ```c#
 private const int BREAK_POINT = 22;
 ```
+
+## Changes for  design
+
+### Domain Model's change
+
+![domainModel.PNG](docs/pics/v2/domainModel-2.0.PNG)
+
+The `GameRoom` can initialize one or even more `Player`.
+
+### Class Model's change
+
+![classModel.PNG](docs/pics/v2/classModel-2.0.PNG)
+
+I will list the changed classes and give some illustrations.
+
+**`Class Deck`:**
+**`Class GameTable`:**
+**`Class GameRoom`:**
+**`Class Player`:**
+**`Class Bet`:**
+**`Class HandCard`:**
+
+## Use Case Model has no change
+
+![userCase1.PNG](docs/pics/v2/userCase-2.0.PNG)
+
+## System Sequence Diagram's change
+
+### Player
+
+![sequencePlayer.PNG](docs/pics/v2/sequencePlayer-2.0.PNG)
+
+### Banker
+
+![sequenceBanker.PNG](docs/pics/v2/sequenceBanker-2.0.PNG)
+
+### Operation Contracts
+
+#### Player：
+
+#### Banker：
+
+## New Display
+
+## Summary
+
+## Reference
