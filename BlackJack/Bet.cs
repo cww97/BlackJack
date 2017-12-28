@@ -5,16 +5,13 @@
         public Bet(){
             betNumber = 10;
         }
-        public Bet(int betNumber){
-            this.betNumber = betNumber;
-        }
 
         public int betNum{
             set{betNumber = value;}
             get{return betNumber;}
         }
 
-        public void addBetMoney(int betnum){  //Add Bet
+        public void Add(int betnum){  //Add Bet
             betNumber += betnum;
         }
     }

@@ -26,10 +26,6 @@ namespace BlackJack{
            return players[i].getTotalPoint();
         }
 
-        public bool playerDouble(int idx) {
-            return players[idx].Double();
-        }
-
         public void Restart() {
             deck = new Deck();
             foreach (Player p in players) {
@@ -40,11 +36,20 @@ namespace BlackJack{
         public int getPlayerMoney(int idx){
             return players[idx].Money;
         }
+        
+        public int getPlayerBet(int idx){
+            return players[idx].Bet.betNum;
+        }
 
         public void playerBet(int idx, int bet){
             // 保证兜里钱够
             players[idx].Bet.betNum = bet;
             //Console.WriteLine("????????? 下注 " + bet);
+        }
+
+        public bool AddBet(int p, int v)
+        {
+            return players[p].AddBet(v);
         }
 
         public void playerWin(int idx){
@@ -70,16 +75,6 @@ namespace BlackJack{
         // Get Boss Point
         public int returnDealerTotalCount(){
             return banker.getTotalPoint();
-        }
-
-        // Get Card Number in player
-        public int GetPlayerCardNumbers(int No){
-            return players[No].returnTotalCardNumInHand();
-        }
-
-        // Get Card Number in banker
-        public int GetBankerCardNumbers(){
-            return banker.returnTotalCardNumInHand();
         }
 
         // Determine the point of player if out 21 

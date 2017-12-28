@@ -1,4 +1,6 @@
-﻿namespace BlackJack{
+﻿using System.Xml.Schema;
+
+namespace BlackJack{
     class Player :Person{
         private Bet bet;    //player's wager
         private int money;  //player's capital
@@ -8,11 +10,10 @@
             Money = 1000;
         }
 
-        public bool Double() {
-            bet.betNum *= 2;
-            if (bet.betNum <= money) return true;
-            bet.betNum /= 2;
-            return false;
+        public bool AddBet(int v) {
+            if (bet.betNum + v > money) return false;
+            bet.betNum += v;
+            return true;
         }
 
         public void Win(){

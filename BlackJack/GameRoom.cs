@@ -12,7 +12,7 @@ namespace BlackJack{
         }
 
         void init() {
-            Console.WriteLine("来啊，快活啊，反正有，大把时光= =");
+            Console.WriteLine("欢迎来到BlackJack");
             Console.WriteLine("Please enter your name:");
             String UserName = Console.ReadLine();
             Player[] p = new Player[1];
@@ -22,7 +22,7 @@ namespace BlackJack{
             Console.WriteLine("Welcome, " + g.Players[0].Name);
         }
 
-        int play(int playerIdx) {
+        int Play(int playerIdx) {
             // ===========================下注=============================
             int money = g.getPlayerMoney(playerIdx);
             Console.WriteLine("您的余额为： " + money + ", 请下注：");
@@ -38,35 +38,35 @@ namespace BlackJack{
                 Console.WriteLine("得到一张牌: " + c.GetCardFace());
             }
             // 由玩家决定是否继续
-            for (int i = 0; i < 3; i++) {
-                Console.WriteLine("您有三种选择：stand(直接结束), hit(继续要牌), double(加倍结束).");
-                Console.WriteLine("输出(s/h/d)进行您的选择：");
-                String op = Console.ReadLine();
-                if (op == "s"){ // ----------------stand---------------------
+            for (int i = 0; i < 20; i++) {
+                Console.WriteLine("您有三种选择：1.stand(直接结束), 2.hit(继续要牌), 3.增加赌注.");
+                Console.WriteLine("输出(1/2/3)进行您的选择：");
+                int op = Convert.ToInt32(Console.ReadLine());
+                if (op == 1){ // ----------------stand---------------------
                     break;
-                } else if (op == "h") { // --------------hit-----------------
+                } else if (op == 2) { // --------------hit-----------------
                     Card c = g.dealOneCardToPlayer(playerIdx);
                     Console.WriteLine("得到一张牌: " + c.GetCardFace());
                     if (g.IsPointOut(playerIdx)){
                         Console.WriteLine("您爆牌了，输了输了");
                         break;
                     }
-                } else if (op == "d") { // ---------------double-------------
-                    bool succ = g.playerDouble(playerIdx);
-                    if (!succ) {
-                        Console.WriteLine("钱不够加倍了，请做其他选择");
-                        i--;
-                    } else{  //  钱足够加倍
-                        Card c = g.dealOneCardToPlayer(playerIdx);
-                        Console.WriteLine("得到一张牌: " + c.GetCardFace());
-                        if (g.IsPointOut(playerIdx)) Console.WriteLine("您爆牌了，输了输了");
+                } else if (op == 3) { // ---------------增加赌注-------------
+                    Console.WriteLine("Your Cash: " + g.getPlayerBet(playerIdx) + "/" + g.getPlayerMoney(playerIdx));
+                    Console.WriteLine("How much bet do you want to add?");
+                    int addMoney = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("addMoney == " + addMoney);
+                    if (g.AddBet(playerIdx, addMoney)){
+                        Console.WriteLine("加注成功，Now: " + g.getPlayerBet(playerIdx) + "/" + g.getPlayerMoney(playerIdx));
                     }
-                    break;
-                } else { // error input
+                    else{
+                        Console.WriteLine("余额不足，加注失败");
+                    }
+                } else { // -----------------error input-------------------
                     Console.WriteLine("输入错误，请重新输入.");
-                    i--;
                 }
             }
+            
             int point = g.returnPlayerTotalPoint(playerIdx);
             if (!g.IsPointOut(playerIdx))
                 Console.WriteLine("您的点数为 " + point);
@@ -113,7 +113,7 @@ namespace BlackJack{
             Console.WriteLine("现在您已坐在 BlackJack 的桌前， 来一盘吗（y/n）");
             String op = Console.ReadLine();
             for (; op != "n";) {
-                int playerPoint = play(0);
+                int playerPoint = Play(0);
                 if (g.Players[0].isBlackJack()) {
                     Console.WriteLine("BlackJack!!!");
                     playerWin(0);
