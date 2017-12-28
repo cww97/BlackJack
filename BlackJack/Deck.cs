@@ -3,6 +3,7 @@
 namespace BlackJack{
     class Deck{ // 牌堆
         private Card[] deckCards;
+        private int cardCnt;
         private int currentIndex;
 
         private Card[] DeckCards{
@@ -18,12 +19,15 @@ namespace BlackJack{
         public Deck(){
             DeckCards = new Card[52];
             currentIndex = 0;
+            cardCnt = 0;
             //Put cards into array
             for (int i = 0; i < 52; i++){
-                DeckCards[i] = new Card(i);
+                if (i % 4 == 2) continue;
+                DeckCards[cardCnt++] = new Card(i);
             }
             WashCard(); //  shuffle the cards
             Throw2Cards();
+            //Console.WriteLine("牌堆牌数：" + cardCnt);
         }
 
 
@@ -31,12 +35,12 @@ namespace BlackJack{
         public bool Throw2Cards()
         {
             currentIndex += 2;
-            return currentIndex < 52;
+            return currentIndex < cardCnt;
         }
 
 
         public Card dealCard(){  // 发牌
-            if (currentIndex >= 52) return null; // 牌堆里没牌了, null
+            if (currentIndex >= cardCnt) return null; // 牌堆里没牌了, null
             currentIndex++;
             return DeckCards[CurrentIndex - 1];
         }
@@ -50,11 +54,11 @@ namespace BlackJack{
         }
         
         public void WashCard(){  // shuffling cards
-            for (int i = 0; i < 52; i++){
+            for (int i = 0; i < 100; i++){
                 Random r0 = new Random(RandomNum());
-                int t0 = r0.Next(0, DeckCards.Length);
+                int t0 = r0.Next(0, cardCnt);
                 Random r1 = new Random(RandomNum());
-                int t1 = r1.Next(0, DeckCards.Length);
+                int t1 = r1.Next(0, cardCnt);
                 // select two random index number, and swap them
                 // c# 居然没有 swap 函数，辣鸡
                 Card tmp =DeckCards[t0];
