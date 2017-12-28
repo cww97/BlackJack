@@ -1,4 +1,4 @@
-﻿# BlackJack Requirement Change
+# BlackJack Requirement Change
 
 ## Changes of Requirements
 
@@ -48,7 +48,11 @@ else if (op == 3) { // ---------------增加赌注-------------
 
 ### 3. Win/Lose Condition: 22 -> 21
 
-// sweet heart
+We declare a static constant named BREAK_POINT.It's easy for us to amend the conditions of winning and losing with this static constant.
+
+```c#
+private const int BREAK_POINT = 22;
+```
 
 ### 4. Remove all cards whose suit is ♠
 
@@ -69,3 +73,7 @@ for (int i = 0; i < 52; i++){
 ### 5. PointOut: 21 -> 22
 
 This is the same as the requirement change3. We donot need extra change.
+
+```c#
+private const int BREAK_POINT = 22;
+```
