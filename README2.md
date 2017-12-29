@@ -1,4 +1,4 @@
-﻿# BlackJack Requirement Change
+# BlackJack Requirement Change
 
 ## Changes of Requirements
 
@@ -92,6 +92,9 @@ for (int i = 0; i < 52; i++){
 
 This is the same as the requirement change3. We donot need extra change.
 
+```c#
+private const int BREAK_POINT = 22;
+```
 ### 6. Multiplayer
 
 We thought about this question before. So our `GameTable.cs` do not have only one `Player`. What we have is `Players[]`. However, in our first version, we only have this code `int playerPoint = Play(0);`. After that we compare this player's point with banker's. Now we need a little change of the `GameRoom`. We may need a `for` loop to get this.
@@ -111,24 +114,41 @@ if (g.Players[0].isBlackJack()) {
         else playerLose(0);
     }
 }
+
+
 ```
 
 MultiPlayer(Now):
 
-```
-
-
-```
-
-
-## Reference
-
-1. C# Array, https://www.cnblogs.com/eniac12/p/4393978.html
-
-2. C# Sort, http://blog.csdn.net/zhulongxi/article/details/51457891
-
 ```c#
-private const int BREAK_POINT = 22;
+int Init() {
+	Console.WriteLine("欢迎来到BlackJack");
+	Console.WriteLine("请输入玩家人数：");  // requirement change 6
+	int playCnt = Convert.ToInt32(Console.ReadLine());
+	Player[] p = new Player[playCnt];
+	for (int i = 0; i < playCnt; i++){
+ 		Console.WriteLine("Player" + (i+1) + "Please enter your name:");
+  		p[i] = new Player();
+		p[i].Name = Console.ReadLine();   
+    }
+    g.Players = p;
+    Console.WriteLine("Welcome, Now we begin our Game.");
+    return playCnt;
+}
+
+private void PlayersWin(int playCnt){
+	Console.WriteLine("玩家胜利");
+	int cnt = g.GetWinCnt(playCnt);
+	for (int i = 0; i < cnt; i++){
+		g.PlayerWin(i, cnt);
+		Console.WriteLine(g.Players[i].Name + "胜利，余额为" + g.GetPlayerMoney(i));
+    }
+	for (int i = cnt; i < playCnt; i++){
+		g.PlayerLose(i);
+		Console.WriteLine(g.Players[i].Name + "失败，余额为" + g.GetPlayerMoney(i));
+	}
+}
+
 ```
 
 ## Changes for  design
@@ -137,7 +157,7 @@ private const int BREAK_POINT = 22;
 
 ![domainModel.PNG](docs/pics/v2/domainModel-2.0.PNG)
 
-The `GameRoom` can initialize one or even more `Player`.
+The `GameRoom` can initialize one or even more `Player` now.
 
 ### Class Model's change
 
@@ -145,12 +165,12 @@ The `GameRoom` can initialize one or even more `Player`.
 
 I will list the changed classes and give some illustrations.
 
-**`Class Deck`:**
-**`Class GameTable`:**
-**`Class GameRoom`:**
-**`Class Player`:**
-**`Class Bet`:**
-**`Class HandCard`:**
+**`Class Deck`:** We make a new operation called `Throw2Cards` to meed the requirement 1.
+**`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose.`AllBet` is to ??? 还有一些函数。
+**`Class GameRoom`:** ？？？
+**`Class Player`:**？？？
+**`Class Bet`:**？？？
+**`Class HandCard`:**We declare a static constant `BREAK_POINT` to judge point-out or not. 
 
 ## Use Case Model has no change
 
@@ -162,18 +182,35 @@ I will list the changed classes and give some illustrations.
 
 ![sequencePlayer.PNG](docs/pics/v2/sequencePlayer-2.0.PNG)
 
+We add a new operation called `addBet()` to meet the requirement,adding bet when players play the game.
+
 ### Banker
 
 ![sequenceBanker.PNG](docs/pics/v2/sequenceBanker-2.0.PNG)
+
+Here is no change.
 
 ### Operation Contracts
 
 #### Player：
 
+Contract CO6: | addBet
+:---|:---
+operation：| addBet()
+cross reference：| add bet
+precondition：| player's money is enough
+postcondition：| system records player's added bet and his remained money updates ,then player can choose to hit or stand.
+
 #### Banker：
+
+Here is no change.
 
 ## New Display
 
 ## Summary
 
 ## Reference
+
+1. C# Array, https://www.cnblogs.com/eniac12/p/4393978.html
+
+2. C# Sort, http://blog.csdn.net/zhulongxi/article/details/51457891

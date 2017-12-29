@@ -106,12 +106,12 @@ namespace BlackJack{
 
         // Determine the point of player if out BREAK_POINT 
         public bool IsPointOut(int playerNo){
-            return players[playerNo].GetTotalPoint() > BREAK_POINT;
+            return players[playerNo].GetTotalPoint() == -1;
         }
 
         //Determine the point of Banker if out BREAK_POINT 
         public bool IsBankerOut(){
-            return banker.GetTotalPoint() > BREAK_POINT;
+            return banker.GetTotalPoint() >BREAK_POINT;
         }
         
         //Show Hand Card
