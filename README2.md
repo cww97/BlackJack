@@ -1,4 +1,4 @@
-# BlackJack Requirement Change
+﻿# BlackJack Requirement Change
 
 ## Changes of Requirements
 
@@ -136,6 +136,16 @@ int Init() {
     return playCnt;
 }
 
+
+
+```
+
+### 7. MultiWinners
+
+This part is the same with last one.
+
+
+```
 private void PlayersWin(int playCnt){
 	Console.WriteLine("玩家胜利");
 	int cnt = g.GetWinCnt(playCnt);
@@ -148,8 +158,13 @@ private void PlayersWin(int playCnt){
 		Console.WriteLine(g.Players[i].Name + "失败，余额为" + g.GetPlayerMoney(i));
 	}
 }
-
 ```
+
+### 8. Banker will be more likely to win
+
+We made a simple design for the role:
+
+If the players' point is the same as the bankers', We judge that 
 
 ## Changes for  design
 
@@ -161,16 +176,16 @@ The `GameRoom` can initialize one or even more `Player` now.
 
 ### Class Model's change
 
-![classModel.PNG](docs/pics/v2/classModel-2.0.PNG)
+![classModel.PNG](docs/pics/v2/classsModel-2.0.PNG)
 
 I will list the changed classes and give some illustrations.
 
 **`Class Deck`:** We make a new operation called `Throw2Cards` to meed the requirement 1.
-**`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose.`AllBet` is to ??? 还有一些函数。
-**`Class GameRoom`:** ？？？
-**`Class Player`:**？？？
-**`Class Bet`:**？？？
-**`Class HandCard`:**We declare a static constant `BREAK_POINT` to judge point-out or not. 
+**`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose. `AllBet()` for players to add Bet, which is easy to understand.
+**`Class GameRoom`:** Reconstruct the method `play()`, and to make it easy to understand, we split some sentences of it intt small functions.
+**`Class Player`:** A new method `addBet()`
+**`Class Bet`:** Nothing
+**`Class HandCard`:** We declare a static constant `BREAK_POINT` to judge point-out or not. 
 
 ## Use Case Model has no change
 
