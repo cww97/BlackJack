@@ -67,7 +67,7 @@ namespace BlackJack{
             }
             // 由玩家决定是否继续
             for (int i = 0; i < 999; i++) {
-                Console.WriteLine("您有三种选择：1.stand(直接结束), 2.hit(继续要牌), 3.增加赌注.");
+                Console.WriteLine("您有三种选择：1.stand(直接结束), 2.hit(继续要牌), 3.addBet（增加赌注）.");
                 Console.WriteLine("输出(1/2/3)进行您的选择：");
                 int op = Convert.ToInt32(Console.ReadLine());
                 if (op == 1) break;

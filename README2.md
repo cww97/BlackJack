@@ -1,10 +1,74 @@
-﻿# BlackJack Requirement Change
+# BlackJack Requirement Change
 
 ## Changes of Requirements
 
 ![reqChange](docs/pics/v2/reqChange.png)
 
-## Solution
+## Changes for  Design
+
+### Domain Model's change
+
+![domainModel.PNG](docs/pics/v2/domainModel-2.0.PNG)
+
+The `GameRoom` can initialize one or even more `Player` now.
+
+### Class Model's change
+
+![classModel.PNG](docs/pics/v2/classsModel-2.0.PNG)
+
+I will list the changed classes and give some illustrations.
+
+**`Class Deck`:** We make a new operation called `Throw2Cards` to meed the requirement 1.
+**`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose. `AllBet()` for players to add Bet, which is easy to understand.
+**`Class GameRoom`:** Reconstruct the method `play()`, and to make it easy to understand, we split some sentences of it into small functions.
+**`Class Player`:** A new method `addBet()`
+**`Class HandCard`:** We declare a static constant `BREAK_POINT` to judge point-out or not. 
+
+## Use Case Model has no change
+
+![userCase1.PNG](docs/pics/v2/userCase-2.0.PNG)
+
+### Use Case Description's change
+
+User Case UC1:| Play Game
+:---|:---
+Scope:| BlackJack Game
+Level:| User Goals
+Main Actor:| Player,Banker
+Stakeholders and Concerns:| Player:wants to win the game.Banker:also wants to win the game.
+Main successful scene:| 1、Players request to initialize a new game2、Player bets 3、Player gets two cards 4、Player decides to hit ,stand or addBet 5、If player's hand-card's value is over 22,player loses,game over 5、Until all players stand ,it turns to banker's turn.Banker will hit when his hand-card'value is under 17 6、If banker's hand-card's value is over 22 ,banker loses,game over 7、Else to compare player's and banker's hand-card's value to show the result.
+Extension:| a、in any time,if this system failed:1、the system can be restarted,and recover the data.
+
+## System Sequence Diagram's change
+
+### Player
+
+![sequencePlayer.PNG](docs/pics/v2/sequencePlayer-2.0.PNG)
+
+We add a new operation called `addBet()` to meet the requirement,adding bet when players play the game.
+
+### Banker
+
+![sequenceBanker.PNG](docs/pics/v2/sequenceBanker-2.0.PNG)
+
+Here is no change.
+
+### Operation Contracts
+
+#### Player：
+
+Contract CO6: | addBet
+:---|:---
+operation：| addBet()
+cross reference：| add bet
+precondition：| player's money is enough
+postcondition：| system records player's added bet and his remained money updates ,then player can choose to hit or stand.
+
+#### Banker：
+
+Here is no change.
+
+## Code Solution
 
 ### 1. Only 50 cards left(throw 2 cards)
 
@@ -166,59 +230,6 @@ We made a simple design for the role:
 
 If the players' point is the same as the bankers', We judge that 
 
-## Changes for  design
-
-### Domain Model's change
-
-![domainModel.PNG](docs/pics/v2/domainModel-2.0.PNG)
-
-The `GameRoom` can initialize one or even more `Player` now.
-
-### Class Model's change
-
-![classModel.PNG](docs/pics/v2/classsModel-2.0.PNG)
-
-I will list the changed classes and give some illustrations.
-
-**`Class Deck`:** We make a new operation called `Throw2Cards` to meed the requirement 1.
-**`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose. `AllBet()` for players to add Bet, which is easy to understand.
-**`Class GameRoom`:** Reconstruct the method `play()`, and to make it easy to understand, we split some sentences of it intt small functions.
-**`Class Player`:** A new method `addBet()`
-**`Class Bet`:** Nothing
-**`Class HandCard`:** We declare a static constant `BREAK_POINT` to judge point-out or not. 
-
-## Use Case Model has no change
-
-![userCase1.PNG](docs/pics/v2/userCase-2.0.PNG)
-
-## System Sequence Diagram's change
-
-### Player
-
-![sequencePlayer.PNG](docs/pics/v2/sequencePlayer-2.0.PNG)
-
-We add a new operation called `addBet()` to meet the requirement,adding bet when players play the game.
-
-### Banker
-
-![sequenceBanker.PNG](docs/pics/v2/sequenceBanker-2.0.PNG)
-
-Here is no change.
-
-### Operation Contracts
-
-#### Player：
-
-Contract CO6: | addBet
-:---|:---
-operation：| addBet()
-cross reference：| add bet
-precondition：| player's money is enough
-postcondition：| system records player's added bet and his remained money updates ,then player can choose to hit or stand.
-
-#### Banker：
-
-Here is no change.
 
 ## New Display
 
