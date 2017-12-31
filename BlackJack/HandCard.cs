@@ -9,6 +9,7 @@ namespace BlackJack{
         private List<Card> cardList;
 
         private const int BREAK_POINT = 22;
+        
         public HandCard(){
             cardList = new List<Card>();
         }
@@ -29,11 +30,10 @@ namespace BlackJack{
                 int value = card.GetCardValue();
                 totalPointCount += value;
             }
-            
             foreach (Card card in cardList){
                 //special card "A",deal with it
                 if (card.GetCardValue() == 1){
-                    if (totalPointCount + 10 <= 21) totalPointCount += 10;
+                    if (totalPointCount + 9 <= BREAK_POINT) totalPointCount += 9;
                 }
             }
             return totalPointCount;

@@ -42,7 +42,6 @@ namespace BlackJack{
             Console.WriteLine("Your Cash: " + g.GetPlayerBet(playerIdx) + "/" + g.GetPlayerMoney(playerIdx));
             Console.WriteLine("How much bet do you want to add?");
             int addMoney = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("addMoney == " + addMoney);
             if (g.AddBet(playerIdx, addMoney)){
                 Console.WriteLine("加注成功，Now: " + g.GetPlayerBet(playerIdx) + "/" + g.GetPlayerMoney(playerIdx));
             }else{
@@ -90,14 +89,13 @@ namespace BlackJack{
             // 先给庄家两张牌
             for (int i = 0; i < 2; i++){
                 Card c = g.DealOneCardToBanker();
-                Console.WriteLine("得到一张牌 " );
             }
             // 由手牌点数决定是否继续
             while (g.BankerContinue()){
                 // --------------hit-----------------
                 Card c = g.DealOneCardToBanker();
                 if (g.IsBankerOut()){
-                    Console.WriteLine("庄家爆牌了，输了输了");
+                    Console.WriteLine("庄家爆牌");
                     break;
                 }
             }

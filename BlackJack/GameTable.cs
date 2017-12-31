@@ -7,13 +7,13 @@ namespace BlackJack{
         private Banker banker;
         private Deck deck;
         private int AllBet;
-        private const int BREAK_POINT = 22;
         
         public GameTable(){  // Init
             //players = new Player[1];
             banker = new Banker();
             banker.Name = "庄家";
             deck = new Deck();
+            AllBet = 0;
         }
        
         // Send a Card to player
@@ -33,6 +33,7 @@ namespace BlackJack{
             foreach (Player p in players) {
                 p.Hand.Clear();
             }
+            AllBet = 0;
         }
 
         public int GetPlayerMoney(int idx){
@@ -48,11 +49,14 @@ namespace BlackJack{
             AllBet += bet;
         }
 
-        public bool AddBet(int p, int v){
+        public bool AddBet(int p, int v)
+        {
+            AllBet += v;
             return players[p].AddBet(v);
         }
 
         public void PlayerWin(int idx, int cnt){
+            Console.WriteLine("AllBet = " + AllBet);
             players[idx].Win(AllBet/cnt);
         }
         
@@ -110,8 +114,9 @@ namespace BlackJack{
         }
 
         //Determine the point of Banker if out BREAK_POINT 
-        public bool IsBankerOut(){
-            return banker.GetTotalPoint() >BREAK_POINT;
+        public bool IsBankerOut()
+        {
+            return banker.GetTotalPoint() == -1;
         }
         
         //Show Hand Card
