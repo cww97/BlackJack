@@ -9,7 +9,7 @@ namespace BlackJack{
         private readonly String[] number = { "J", "Q", "K" };
 
         // 在这个游戏中，牌的花色没用作用，故不做考虑
-        // num: 1..52
+        // num: 0..51
         public Card(int num){
             this.value = countCardValue(num);
             this.hashNum = num;
@@ -17,18 +17,18 @@ namespace BlackJack{
 
         // 从牌的编号得到牌上的真实数字
         private int countCardValue(int num){
-            if (num > 40) return 10;  // J Q K 都算 10
-            return (num - 1) / 4 + 1; // 111122223333....10101010
+            if (num >= 40) return 10;  // J Q K 都算 10
+            return (num) / 4 + 1; // 111122223333....10101010
         }
 
         public String GetCardFace(){
-            int hash = hashNum - 1;
+            int hash = hashNum;
             String flo = flower[hash % 4];
             String num;
             if (hash < 4) num = "A";
             else if (hash < 40) num = (hash / 4 + 1).ToString();
             else num = number[(hash - 40) / 4];
-            return flo + " " + num;
+            return flo + num + " ";
         }
 
         public int GetCardValue(){

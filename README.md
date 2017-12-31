@@ -8,9 +8,11 @@ Computer Science & Software Energeering College
 
 Grade 2015
 
-![](https://avatars3.githubusercontent.com/u/18680026?s=40&v=4) Weiwen Chen 10152510217
+![](https://avatars3.githubusercontent.com/u/18680026?s=40&v=4) [Weiwen Chen 10152510217](https://github.com/cww97)
 
-![](docs/pics/tx.png) Haoqian You 10152510210
+![](docs/pics/tx.png) [Haoqian You 10152510210](https://github.com/YvonneYou)
+
+https://github.com/LittleSweetHeart/BlackJack
 
 ## BackGround
 
@@ -58,7 +60,7 @@ Level:| User Goals
 Main Actor:| Player,Banker
 Stakeholders and Concerns:| Player:wants to win the game.Banker:also wants to win the game.
 Main successful scene:| 1、Player requests to initialize a new game2、Player bets 3、Player gets two cards 4、Player decides to hit ,stand or double&stand 5、If player's hand-card's value is over 21,player loses,game over 5、Until player stands ,it turns to banker's turn.Banker will hit when his hand-card'value is under 17 6、If banker's hand-card's value is over 21 ,banker loses,game over 7、Else to compare player's and banker's hand-card's value to show the result
-Extension:| a、in any time,if this system failed:1、the system can be restarted,and recover the data.
+Extension:| a. in any time, if this system failed: 1.the system can be restarted, and recover the data.
 
 ## System Sequence Diagram
 
@@ -386,9 +388,6 @@ int Init() {
     Console.WriteLine("Welcome, Now we begin our Game.");
     return playCnt;
 }
-
-
-
 ```
 
 ### 7. MultiWinners
@@ -396,7 +395,7 @@ int Init() {
 This part is the same with last one.
 
 
-```
+```c#
 private void PlayersWin(int playCnt){
 	Console.WriteLine("玩家胜利");
 	int cnt = g.GetWinCnt(playCnt);
@@ -417,8 +416,129 @@ We made a simple design for the role:
 
 If the players' point is the same as the bankers', We judge that 
 
+```c#
+int maxPlayerPoint = g.SortPlayers(playCnt);
+if (maxPlayerPoint <= bankerPoint){ // banker win
+    BankerWin(playCnt);
+}else{ // players win
+    PlayersWin(playCnt);
+}
+```
+
+## Some Questions
+
+### Point out
+
+`GameTable.cs`
+
+```c#
+// Determine the point of player if out BREAK_POINT 
+public bool IsPointOut(int playerNo){
+    return players[playerNo].GetTotalPoint() == -1;
+}
+
+//Determine the point of Banker if out BREAK_POINT 
+public bool IsBankerOut()
+{
+    return banker.GetTotalPoint() == -1;
+}
+```
+
+`Person.cs`
+
+```c#
+public int GetTotalPoint()
+{
+    int ret = Hand.countTotalPoint();
+    return ret <= 22 ? ret : -1;
+}
+```
+
+Next part we will see `countTotalPoint()`
+
+### Special Card A
+
+Well handled.
+
+```c#
+//Compute Hand Card Point
+public int countTotalPoint(){
+    int totalPointCount = 0;
+    foreach (Card card in cardList){
+        int value = card.GetCardValue();
+        totalPointCount += value;
+    }
+    foreach (Card card in cardList){
+        //special card "A",deal with it
+        if (card.GetCardValue() == 1){
+            if (totalPointCount + 9 <= BREAK_POINT) totalPointCount += 9;
+        }
+    }
+    return totalPointCount;
+}
+```
+
+### No two the same cards.
+
+We have talked clearly about our card hash system(0-51, one hashNum to one card). So we will not have two same cards.
+
+see `Card.cs` for details
+
+```c#
+// 从牌的编号得到牌上的真实数字
+private int countCardValue(int num){
+    if (num >= 40) return 10;  // J Q K 都算 10
+    return (num) / 4 + 1; // 111122223333....10101010
+}
+
+public String GetCardFace(){
+    int hash = hashNum;
+    String flo = flower[hash % 4];
+    String num;
+    if (hash < 4) num = "A";
+    else if (hash < 40) num = (hash / 4 + 1).ToString();
+    else num = number[(hash - 40) / 4];
+    return flo + num + " ";
+}
+```
+
+### Bet Calculate
+
+`GameTalble.cs` has a `private int AllBet;`
+
+```c#
+public void PlayerBet(int idx, int bet){ // 保证兜里钱够
+    players[idx].Bet.betNum = bet;
+    AllBet += bet;
+}
+
+public bool AddBet(int p, int v)
+{
+    AllBet += v;
+    return players[p].AddBet(v);
+}
+```
+
+when players win
+
+```c#
+public void PlayerWin(int idx, int cnt){
+    Console.WriteLine("AllBet = " + AllBet);
+    players[idx].Win(AllBet/cnt);
+}
+```
+
+From above, all question on ppt has been well handled, and in real-playing we didnot find such problems. 
 
 ## New Display
+
+First display on cww's PC.
+
+![](docs/pics/v2/display_cww.png)
+
+Second display on yhq's laptop.
+
+![](docs/pics/v2/display_tx1.png)
 
 ## Summary
 
@@ -427,6 +547,8 @@ This lab is not only exercises our logical thinking ability but also strengthen 
 Now the only thing I want is, my hair.
 
 ![](docs/pics/hair1.jpg) --> ![](docs/pics/hair0.jpg)
+
+Version2 is not pretty hard, because we had done a great amount of jobs in our first version.
 
 ## Reference
 
@@ -438,6 +560,4 @@ Now the only thing I want is, my hair.
 
 4. Another BlackJack http://www.docin.com/p-1432261295.html
 
-5. C# Array, https://www.cnblogs.com/eniac12/p/4393978.html
-
-6. C# Sort, http://blog.csdn.net/zhulongxi/article/details/51457891
+5. 大话设计模式 https://book.douban.com/subject/2334288/
