@@ -208,9 +208,13 @@ The `GameRoom` can initialize one or even more `Player` now.
 I will list the changed classes and give some illustrations.
 
 **`Class Deck`:** We make a new operation called `Throw2Cards` to meed the requirement 1.
+
 **`Class GameTable`:** In this class ,we  declare a array `Player[]` to control multiplayer. Besides,we declare a static constant `BREAK_POINT` for manager to  revise the conditions of win and lose. `AllBet()` for players to add Bet, which is easy to understand.
+
 **`Class GameRoom`:** Reconstruct the method `play()`, and to make it easy to understand, we split some sentences of it into small functions.
+
 **`Class Player`:** A new method `addBet()`
+
 **`Class HandCard`:** We declare a static constant `BREAK_POINT` to judge point-out or not. 
 
 ## Use Case Model has no change
@@ -536,9 +540,9 @@ First display on cww's PC.
 
 ![](docs/pics/v2/display_cww.png)
 
-Second display on yhq's laptop.
+Second display on tx's laptop.
 
-![](docs/pics/v2/display_tx1.png)
+![](docs/pics/v2/display_tx1.PNG)
 
 ## Summary
 
