@@ -552,7 +552,7 @@ Now the only thing I want is, my hair.
 
 ![](docs/pics/hair1.jpg) --> ![](docs/pics/hair0.jpg)
 
-Version2 is not pretty hard, because we had done a great amount of jobs in our first version.
+Version2 is not pretty hard, because we had done a great amount of jobs in our first version.After we learn some new design patterns,we apply them in our project immediately.We strictly abide by the principle of opening and closing.So we only have to make some changes in some class,just like add some new operations and new variables.Besides,we do some different logical method.It's close to the final exam with so many projects to polish.We spend so much time and energy in this project,and hope to get a great GPA.
 
 ## Reference
 
