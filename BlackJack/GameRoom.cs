@@ -17,7 +17,7 @@ namespace BlackJack{
             int playCnt = Convert.ToInt32(Console.ReadLine());
             Player[] p = new Player[playCnt];
             for (int i = 0; i < playCnt; i++){
-                Console.WriteLine("Player" + (i+1) + "Please enter your name:");
+                Console.WriteLine("Player" + (i+1) + "  Please enter your name:");
                 p[i] = new Player();
                 p[i].Name = Console.ReadLine();   
             }
@@ -80,7 +80,7 @@ namespace BlackJack{
             }
             
             int point = g.PlayerTotalPoint(playerIdx);
-            if (!g.IsPointOut(playerIdx)) Console.WriteLine("您的点数为 " + point);
+            if (!g.IsPointOut(playerIdx)) Console.WriteLine("您的点数为：" + point);
             Console.WriteLine("--------您的表演结束了---------");
             return g.IsPointOut(playerIdx) ? -1 : point;
         }
@@ -103,6 +103,10 @@ namespace BlackJack{
             int point = g.DealerTotalCount();
             string face = g.ShowBankerHandCard();
             Console.WriteLine("庄家手牌为："+ face );
+            if (!g.IsBankerOut())
+            {
+                Console.WriteLine("庄家点数为："+ point );
+            }
             return point;
         }
 

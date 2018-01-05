@@ -14,6 +14,7 @@ namespace BlackJack{
         public bool AddBet(int v) {
             if (bet.betNum + v > money) return false;
             bet.betNum += v;
+            //money -= v;
             return true;
         }
 

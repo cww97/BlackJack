@@ -33,7 +33,7 @@ namespace BlackJack{
             foreach (Card card in cardList){
                 //special card "A",deal with it
                 if (card.GetCardValue() == 1){
-                    if (totalPointCount + 9 <= BREAK_POINT) totalPointCount += 9;
+                    if (totalPointCount + 10 <= BREAK_POINT) totalPointCount += 10;
                 }
             }
             return totalPointCount;

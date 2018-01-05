@@ -46,6 +46,7 @@ namespace BlackJack{
 
         public void PlayerBet(int idx, int bet){ // 保证兜里钱够
             players[idx].Bet.betNum = bet;
+            //players[idx].Money -= bet;
             AllBet += bet;
         }
 

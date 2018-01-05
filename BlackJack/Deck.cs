@@ -5,6 +5,7 @@ namespace BlackJack{
         private Card[] deckCards;
         private int cardCnt;
         private int currentIndex;
+        private int GroupNum = 1;
 
         private Card[] DeckCards{
             get{return deckCards;}
@@ -17,11 +18,11 @@ namespace BlackJack{
         }
 
         public Deck(){
-            DeckCards = new Card[52];
+            DeckCards = new Card[52*GroupNum];
             currentIndex = 0;
             cardCnt = 0;
             //Put cards into array
-            for (int i = 0; i < 52; i++){
+            for (int i = 0; i < 52*GroupNum; i++){
                 if (i % 4 == 2) continue;
                 DeckCards[cardCnt++] = new Card(i);
             }
